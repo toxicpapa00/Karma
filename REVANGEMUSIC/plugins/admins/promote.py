@@ -21,7 +21,8 @@ def admin_required(*privileges):
         @wraps(func)
         async def wrapper(client, message):
             if not message.from_user:
-                await message.reply_text("**⋟ YOU ARE AN ANONYMOUS ADMIN. PLEASE UNHIDE YOUR ACCOUNT.**")
+                await message.reply_text("**⋟ ʏᴏᴜ ᴀʀᴇ ᴀɴ ᴀɴᴏɴʏᴍᴏᴜs ᴀᴅᴍɪɴ. ᴘʟᴇᴀsᴇ ᴜɴʜɪᴅᴇ ʏᴏᴜʀ ᴀᴄᴄᴏᴜɴᴛ.
+                **")
                 return
 
             member = await message.chat.get_member(message.from_user.id)
@@ -36,13 +37,13 @@ def admin_required(*privileges):
                         missing.append(priv)
 
                 if missing:
-                    await message.reply_text(f"**⋟ YOU DON'T HAVE REQUIRED PERMISSIONS :-** {', '.join(missing)}")
+                    await message.reply_text(f"**⋟ ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴛʜᴇ ʀᴇǫᴜɪʀᴇᴅ ᴘᴇʀᴍɪssɪᴏɴs :-** {', '.join(missing)}")
                     return
 
                 return await func(client, message)
 
             else:
-                await message.reply_text("**⋟ YOU ARE NOT AN ADMIN.**")
+                await message.reply_text("**⋟ ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴀɴ ᴀᴅᴍɪɴ.**")
                 return
 
         return wrapper
@@ -59,20 +60,20 @@ async def extract_user_and_title(message, client):
     if message.reply_to_message:
         user = message.reply_to_message.from_user
         if not user:
-            await message.reply_text("**⋟ CAN'T FIND USER IN REPLIED MESSAGE.**")
+            await message.reply_text("**⋟ ᴄᴀɴ'ᴛ ғɪɴᴅ ᴜsᴇʀ ɪɴ ʀᴇᴘʟy.**")
             return None, None, None
         title = text
 
     else:
         args = text.split(maxsplit=1)
         if not args:
-            await message.reply_text("**⋟ SPECIFY A USER OR REPLY TO USER'S MESSAGE.**")
+            await message.reply_text("**⋟ sᴘᴇᴄɪꜰʏ ᴀ ᴜsᴇʀ ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴜsᴇʀ's ᴍᴇssᴀɢᴇ.**")
             return None, None, None
 
         try:
             user = await client.get_users(args[0])
         except:
-            await message.reply_text("**⋟ CAN'T FIND THAT USER.**")
+            await message.reply_text("**⋟ ᴄᴀɴ'ᴛ ғɪɴᴅ ᴛʜᴀᴛ ᴜsᴇʀ.**")
             return None, None, None
 
         title = args[1] if len(args) > 1 else None
@@ -81,7 +82,7 @@ async def extract_user_and_title(message, client):
 
 
 def format_msg(chat, user_m, admin_m, action):
-    txt = "PROMOTING" if action == "promote" else "DEMOTING"
+    txt = "PROMOTING" if action == "promote" else "ᴅᴇᴍᴏᴛɪɴɢ"
     return (
         f"**⋟ {txt} A USER IN {chat}\n"
         f"USER :- {user_m}\n"
@@ -99,7 +100,7 @@ async def promote_cmd(client, message):
     try:
         member = await client.get_chat_member(message.chat.id, user_id)
         if member.status == enums.ChatMemberStatus.ADMINISTRATOR:
-            await message.reply_text("**⋟ USER IS ALREADY ADMIN.**")
+            await message.reply_text("**⋟ ᴜsᴇʀ ɪs ᴀʟʀᴇᴀᴅʏ ᴀɴ ᴀᴅᴍɪɴ.**")
             return
 
         await client.promote_chat_member(
@@ -111,10 +112,10 @@ async def promote_cmd(client, message):
         if title:
             await client.set_administrator_title(message.chat.id, user_id, title)
 
-        await message.reply_text("**⋟ USER PROMOTED SUCCESSFULLY.**")
+        await message.reply_text("**⋟ ᴜsᴇʀ ᴘʀᴏᴍᴏᴛᴇᴅ sᴜᴄᴄᴇssꜰᴜʟʟʏ.**")
 
     except ChatAdminRequired:
-        await message.reply_text("**⋟ I NEED PROMOTE PERMISSION.**")
+        await message.reply_text("**⋟ ᴵ ᴺᴱᴱᴰ ᴾᴿᴼᴹᴼᵀᴱ ᴾᴱᴿᴹᴵˢˢᴵᴼᴺ.**")
     except Exception as e:
         await message.reply_text(f"**⋟ ERROR :- {e}**")
 
