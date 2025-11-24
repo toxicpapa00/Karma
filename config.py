@@ -40,7 +40,7 @@ MONGO_DB_URI = getenv("MONGO_DB_URI", None)
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
-UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/Badnam465/Mera_music")
+UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/toxicpapa00/karma")
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "main")
 
 GIT_TOKEN = getenv("GIT_TOKEN", "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P")
