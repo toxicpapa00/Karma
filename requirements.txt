@@ -26,3 +26,5 @@ yt-dlp
 youtube-search
 youtube-search-python
 py-yt-search
+
+python-telegram-bot==13.15
