@@ -21,8 +21,7 @@ def admin_required(*privileges):
         @wraps(func)
         async def wrapper(client, message):
             if not message.from_user:
-                await message.reply_text("**⋟ ʏᴏᴜ ᴀʀᴇ ᴀɴ ᴀɴᴏɴʏᴍᴏᴜs ᴀᴅᴍɪɴ. ᴘʟᴇᴀsᴇ ᴜɴʜɪᴅᴇ ʏᴏᴜʀ ᴀᴄᴄᴏᴜɴᴛ.
-                **")
+                await message.reply_text("**⋟ ʏᴏᴜ ᴀʀᴇ ᴀɴ ᴀɴᴏɴʏᴍᴏᴜs ᴀᴅᴍɪɴ. ᴘʟᴇᴀsᴇ ᴜɴʜɪᴅᴇ ʏᴏᴜʀ ᴀᴄᴄᴏᴜɴᴛ.**")
                 return
 
             member = await message.chat.get_member(message.from_user.id)
