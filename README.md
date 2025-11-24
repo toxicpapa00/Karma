@@ -7,7 +7,7 @@
     ─「 ᴅᴇᴩʟᴏʏ ᴏɴ ʜᴇʀᴏᴋᴜ 」─
 </h3>
 
-<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/Badnam465/Mera_music"> <img src="https://www.herokucdn.com/deploy/button.svg"></a></p>
+<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/toxicpapa00/karma"> <img src="https://www.herokucdn.com/deploy/button.svg"></a></p>
 
 <br />
 
