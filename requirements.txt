@@ -28,3 +28,4 @@ youtube-search-python
 py-yt-search
 
 python-telegram-bot==13.15
+pyrogram==2.0.106
