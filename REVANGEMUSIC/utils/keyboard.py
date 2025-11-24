@@ -6,29 +6,49 @@
 # 📢 Telegram channel : t.me/dmcatelegram
 # =======================================================
 
-from pykeyboard import InlineKeyboard
-from pyrogram.types import InlineKeyboardButton as Ikb
-
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from .functions import get_urls_from_text as is_url
 
 
 def keyboard(buttons_list, row_width: int = 2):
-    buttons = InlineKeyboard(row_width=row_width)
-    data = [
-        (
-            Ikb(text=str(i[0]), callback_data=str(i[1]))
-            if not is_url(i[1])
-            else Ikb(text=str(i[0]), url=str(i[1]))
-        )
-        for i in buttons_list
+    """
+    buttons_list example:
+    [
+        ("Button Text", "callback_or_url"),
+        ("Next", "callback_or_url")
     ]
-    buttons.add(*data)
-    return buttons
+    """
+    data = []
+    temp = []
+
+    for i in buttons_list:
+        if not is_url(i[1]):
+            btn = InlineKeyboardButton(text=str(i[0]), callback_data=str(i[1]))
+        else:
+            btn = InlineKeyboardButton(text=str(i[0]), url=str(i[1]))
+
+        temp.append(btn)
+
+        if len(temp) == row_width:
+            data.append(temp)
+            temp = []
+
+    if temp:
+        data.append(temp)
+
+    return InlineKeyboardMarkup(data)
 
 
 def ikb(data: dict, row_width: int = 2):
-    return keyboard(data.items(), row_width=row_width)
-
+    """
+    data example:
+    {
+        "Button Text": "callback",
+        "Google": "https://google.com"
+    }
+    """
+    buttons = list(data.items())
+    return keyboard(buttons, row_width=row_width)
 # ======================================================
 # ©️ 2025-26 All Rights Reserved by Revange 😎
 
